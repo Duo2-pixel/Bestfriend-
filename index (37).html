@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For Khushbu ✨</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+  
+  <style>
+    :root{
+      --bg1:#fff3f7;
+      --bg2:#ffe0ea;
+      --bg3:#ffc2d7;
+      --accent:#ff4d7d;
+      --accent2:#ff7aa2;
+      --text:#7a103d;
+      --card:rgba(255,255,255,.55);
+      --shadow:0 24px 60px rgba(255, 77, 125, .18);
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{
+      height:100%;
+      margin:0;
+      font-family:'Plus Jakarta Sans', sans-serif;
+      color:var(--text);
+      overflow-x:hidden;
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,.78), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(255,255,255,.45), transparent 30%),
+        linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));
+      transition: background 900ms ease;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background:
+        radial-gradient(circle at 16% 22%, rgba(255,255,255,.8) 0 2px, transparent 3px),
+        radial-gradient(circle at 74% 28%, rgba(255,255,255,.55) 0 2px, transparent 3px),
+        radial-gradient(circle at 66% 80%, rgba(255,255,255,.5) 0 2px, transparent 3px),
+        radial-gradient(circle at 30% 70%, rgba(255,255,255,.42) 0 2px, transparent 3px);
+      opacity:.55;
+    }
+
+    .hearts{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      overflow:hidden;
+      z-index:1;
+    }
+    .heart{
+      position:absolute;
+      bottom:-30px;
+      font-size:18px;
+      opacity:.8;
+      color:rgba(255,77,125,.75);
+      animation: rise linear forwards;
+    }
+    @keyframes rise{
+      0%{ transform:translateY(0) scale(.8) rotate(0deg); opacity:0; }
+      10%{ opacity:1; }
+      100%{ transform:translateY(-120vh) scale(1.8) rotate(18deg); opacity:0; }
+    }
+
+    /* Fixed alignment issue here */
+    .page{
+      position:fixed;
+      inset:0;
+      display:none;
+      padding: clamp(30px, 5vh, 60px) 22px; /* Gives safe space at top/bottom */
+      text-align:center;
+      z-index:2;
+      overflow-y: auto; /* Allows scrolling on small screens */
+      -webkit-overflow-scrolling: touch;
+    }
+    .page.active{ 
+      display:flex; 
+      flex-direction: column; 
+    }
+
+    .card{
+      margin: auto; /* Centers card perfectly but lets it scroll if too tall */
+      width:min(1040px, 100%);
+      padding:clamp(22px, 4vw, 42px);
+      border-radius:34px;
+      background:var(--card);
+      border:1px solid rgba(255,255,255,.55);
+      box-shadow:var(--shadow);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      position:relative;
+      overflow:hidden;
+      flex-shrink: 0; /* Prevents card from squishing */
+    }
+
+    .card::after{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:linear-gradient(135deg, transparent 0%, rgba(255,255,255,.32) 40%, transparent 70%);
+      transform:translateX(-120%);
+      animation: shimmer 6s infinite;
+      pointer-events:none;
+    }
+    @keyframes shimmer{
+      0%,45%{ transform:translateX(-120%); }
+      70%,100%{ transform:translateX(120%); }
+    }
+
+    .micro{
+      letter-spacing:.24em;
+      text-transform:uppercase;
+      font-size:12px;
+      font-weight:900;
+      color:#d4356d;
+      opacity:.85;
+    }
+
+    .title{
+      font-family:'Dancing Script', cursive;
+      font-size:clamp(40px, 5vw, 72px);
+      line-height:1;
+      margin:12px 0 16px;
+      color:#b0134e;
+      text-shadow:0 8px 20px rgba(176,19,78,.10);
+    }
+
+    .subtitle{
+      font-size:clamp(16px, 2.1vw, 20px);
+      line-height:1.85;
+      max-width:760px;
+      margin:0 auto 24px;
+      color:#6f143a;
+      font-weight:650;
+    }
+
+    .btn-row{
+      display:flex;
+      gap:14px;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin-top:22px;
+    }
+
+    button{
+      border:none;
+      cursor:pointer;
+      padding:14px 24px;
+      border-radius:999px;
+      font-size:16px;
+      font-weight:900;
+      color:white;
+      background:linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow:0 14px 30px rgba(255,77,125,.25);
+      transition:.25s ease;
+      transform:translateY(0);
+      z-index: 10;
+      position: relative;
+    }
+    button:hover{
+      transform:translateY(-3px) scale(1.02);
+      box-shadow:0 18px 36px rgba(255,77,125,.32);
+    }
+    .ghost{
+      background:rgba(255,255,255,.72);
+      color:#b0134e;
+      border:1px solid rgba(255,77,125,.18);
+    }
+
+    .envelope-wrap{
+      display:grid;
+      place-items:center;
+      gap:18px;
+      animation: float 3s ease-in-out infinite;
+      cursor:pointer;
+      user-select:none;
+    }
+    .envelope{
+      width:230px;
+      height:155px;
+      position:relative;
+      border-radius:18px;
+      background:linear-gradient(180deg,#ffbfd0,#ff9fbb);
+      box-shadow:0 18px 40px rgba(255,77,125,.25);
+    }
+    .envelope::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(135deg, transparent 49.5%, rgba(255,255,255,.55) 50%, transparent 50.5%) left top/50% 100% no-repeat,
+        linear-gradient(225deg, transparent 49.5%, rgba(255,255,255,.45) 50%, transparent 50.5%) right top/50% 100% no-repeat;
+      border-radius:18px;
+      opacity:.94;
+    }
+    .envelope::after{
+      content:"💌";
+      position:absolute;
+      left:50%;
+      top:50%;
+      width:56px;
+      height:56px;
+      transform:translate(-50%,-50%);
+      border-radius:50%;
+      background:linear-gradient(135deg,#ff4d7d,#ff7aa2);
+      box-shadow:0 0 0 10px rgba(255,255,255,.25), 0 10px 20px rgba(0,0,0,.08);
+      display:grid;
+      place-items:center;
+      color:white;
+      font-size:24px;
+    }
+    .envelope-cap{
+      position:absolute;
+      inset:auto 0 0 0;
+      height:75%;
+      background:linear-gradient(180deg, transparent 0 30%, rgba(255,255,255,.14) 30% 100%);
+      clip-path:polygon(0 0,50% 48%,100% 0,100% 100%,0 100%);
+      border-radius:0 0 18px 18px;
+    }
+    .tap{
+      font-weight:900;
+      color:#b0134e;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-size:13px;
+    }
+
+    .story-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:24px;
+      align-items:center;
+    }
+
+    .art{
+      min-height:340px;
+      border-radius:30px;
+      background:linear-gradient(145deg, rgba(255,255,255,.56), rgba(255,255,255,.22));
+      border:1px solid rgba(255,255,255,.5);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.5);
+      position:relative;
+      overflow:hidden;
+      padding:20px;
+    }
+    .art::before{
+      content:"";
+      position:absolute;
+      inset:-30%;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.65), transparent 25%),
+        radial-gradient(circle at 70% 70%, rgba(255,122,162,.25), transparent 35%);
+      animation: drift 8s ease-in-out infinite alternate;
+    }
+    @keyframes drift{
+      from{ transform:translate3d(-6px,-6px,0) scale(1); }
+      to{ transform:translate3d(10px,12px,0) scale(1.05); }
+    }
+    .scene{
+      position:relative;
+      z-index:1;
+      height:100%;
+      display:grid;
+      place-items:center;
+    }
+
+    .photo-frame{
+      width:min(350px, 90%);
+      aspect-ratio: 3 / 4;
+      border-radius:26px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.6), rgba(255,255,255,.3)),
+        linear-gradient(135deg,#ffd8e5,#ffb7cd);
+      border:10px solid rgba(255,255,255,.55);
+      box-shadow:0 18px 40px rgba(255,77,125,.2);
+      position:relative;
+      overflow:hidden;
+      transform:rotate(-2deg);
+    }
+    .photo-frame::before{
+      content:"";
+      position:absolute;
+      inset:18px;
+      border-radius:18px;
+      border:1px dashed rgba(176,19,78,.25);
+      z-index:2;
+      pointer-events:none;
+    }
+    .photo-frame img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      filter:saturate(1.05) contrast(1.02);
+    }
+
+    .polaroids{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      justify-content:center;
+      align-items:center;
+    }
+    .polaroid{
+      width:150px;
+      aspect-ratio: 3 / 4;
+      padding:10px 10px 28px;
+      background:rgba(255,255,255,.82);
+      border-radius:18px;
+      box-shadow:0 18px 30px rgba(255,77,125,.12);
+      transform:rotate(var(--r));
+      transition:.25s ease;
+    }
+    .polaroid:hover{
+      transform:translateY(-6px) rotate(0deg) scale(1.03);
+    }
+    .polaroid img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      border-radius:12px;
+      display:block;
+    }
+
+    .bubble{
+      display:inline-block;
+      background:rgba(255,255,255,.72);
+      padding:12px 16px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.6);
+      box-shadow:0 12px 28px rgba(255,77,125,.10);
+      font-weight:800;
+      margin:8px 8px 0 0;
+      color:#8a1744;
+    }
+
+    .note{
+      display:inline-block;
+      padding:14px 18px;
+      border-radius:18px;
+      background:rgba(255,255,255,.7);
+      border:1px solid rgba(255,255,255,.7);
+      box-shadow:0 12px 24px rgba(255,77,125,.12);
+      font-weight:800;
+      color:#8a1744;
+      transform:rotate(var(--r));
+      margin:8px;
+    }
+
+    .progress{
+      display:flex;
+      gap:8px;
+      justify-content:center;
+      margin-bottom:18px;
+      flex-wrap:wrap;
+    }
+    .dot{
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:rgba(255,255,255,.6);
+      border:1px solid rgba(255,77,125,.22);
+      transition:.25s ease;
+    }
+    .dot.active{
+      width:26px;
+      border-radius:999px;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+    }
+
+    .theme-1{ --card:rgba(255,255,255,.52); }
+    .theme-2{ --bg1:#fff2f8; --bg2:#ffe1ec; --bg3:#ffc1d6; --accent:#ff5d8f; --accent2:#ff8fa8; }
+    .theme-3{ --bg1:#fff7ef; --bg2:#ffe8da; --bg3:#ffd1bf; --accent:#ff7a59; --accent2:#ff9c74; }
+    .theme-4{ --bg1:#fef2ff; --bg2:#f4d9ff; --bg3:#e8c4ff; --accent:#b85cff; --accent2:#ff7ad9; }
+    .theme-5{ --bg1:#eef8ff; --bg2:#d6efff; --bg3:#c0e7ff; --accent:#3f87ff; --accent2:#6cb4ff; }
+    .theme-6{ --bg1:#fff0f4; --bg2:#ffd5e1; --bg3:#ffb5c7; --accent:#ff3d6e; --accent2:#ff7798; }
+    .theme-final{ --bg1:#ff4d7d; --bg2:#ff3d6b; --bg3:#ff9f43; --accent:#ffffff; --accent2:#fff0f4; --text:#fff; --card:rgba(255,255,255,.13); }
+
+    .theme-final .card{
+      border-color:rgba(255,255,255,.2);
+      box-shadow:0 24px 60px rgba(0,0,0,.16);
+    }
+    .theme-final .title,
+    .theme-final .subtitle,
+    .theme-final .micro{
+      color:#fff;
+    }
+    .theme-final button{
+      background:white;
+      color:#ff2f63;
+    }
+    .theme-final .ghost{
+      background:rgba(255,255,255,.16);
+      color:#fff;
+      border-color:rgba(255,255,255,.35);
+    }
+
+    /* Final Page Animated Text CSS */
+    .ml6 {
+      position: relative;
+      font-size: clamp(40px, 6vw, 60px);
+      font-weight: 800;
+      color: white;
+      text-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .ml6 .text-wrapper {
+      position: relative;
+      display: inline-block;
+      padding-top: 0.2em;
+      padding-right: 0.05em;
+      padding-bottom: 0.1em;
+      overflow: hidden;
+    }
+    .ml6 .letter {
+      display: inline-block;
+      line-height: 1em;
+    }
+
+    .fade-in{
+      animation: fadeUp .7s ease both;
+    }
+    .delay-1{ animation-delay:.15s; }
+    .delay-2{ animation-delay:.3s; }
+    .delay-3{ animation-delay:.45s; }
+    .delay-4{ animation-delay:.6s; }
+    
+    @keyframes fadeUp{
+      from{ opacity:0; transform:translateY(18px) scale(.98); }
+      to{ opacity:1; transform:translateY(0) scale(1); }
+    }
+
+    @media (max-width: 900px){
+      .story-grid{ grid-template-columns:1fr; }
+      .art{ min-height:250px; }
+      .photo-frame{ width:min(290px, 92%); }
+      .polaroid{ width:132px; }
+    }
+  </style>
+</head>
+<body>
+  
+  <audio id="bg-music" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="hearts" id="hearts"></div>
+
+  <section id="intro" class="page active theme-1">
+    <div class="card" style="max-width:760px;">
+      <div class="progress">
+        <span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      </div>
+      <div class="envelope-wrap" onclick="startJourney()">
+        <div class="micro fade-in">A tiny surprise for Khushbu</div>
+        <div class="envelope fade-in delay-1">
+          <div class="envelope-cap"></div>
+        </div>
+        <div class="tap fade-in delay-2">Tap to open the note</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="page1" class="page theme-2">
+    <div class="card">
+      <div class="progress">
+        <span class="dot"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      </div>
+      <div class="story-grid">
+        <div class="art">
+          <div class="scene">
+            <div class="polaroids fade-in">
+              <div class="polaroid" style="--r:-6deg">
+                <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=900&auto=format&fit=crop" alt="sweet meeting" onerror="this.src='https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=900&auto=format&fit=crop'">
+              </div>
+              <div class="polaroid" style="--r:4deg">
+                <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=900&auto=format&fit=crop" alt="soft smile" onerror="this.src='https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=900&auto=format&fit=crop'">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="micro fade-in">The first chapter</div>
+          <h1 class="title fade-in delay-1">Snap se start hua…</h1>
+          <p class="subtitle fade-in delay-2">
+            Thode hi waqt me tu itni achhi dost ban gayi ki pata hi nahi chala. 
+            Ab toh aisa lagta hai jaise har baat pe tera opinion lena zaroori ho gaya hai.
+          </p>
+          <div class="btn-row fade-in delay-3">
+            <button onclick="next('page2')">Next memory ✨</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="page2" class="page theme-3">
+    <div class="card">
+      <div class="progress">
+        <span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      </div>
+      <div class="story-grid">
+        <div>
+          <div class="micro fade-in">The chats that stay</div>
+          <h1 class="title fade-in delay-1">Roz ki bakwas</h1>
+          <p class="subtitle fade-in delay-2">
+            Good morning texts, random memes, funny replies, aur bina baat ki behas — 
+            teri inhi baaton ne boring din ko bhi mazedar bana diya hai.
+          </p>
+          <div class="btn-row fade-in delay-3">
+            <button onclick="next('page3')">Show the fun 💌</button>
+          </div>
+        </div>
+        <div class="art">
+          <div class="scene">
+            <div class="photo-frame fade-in" style="transform:rotate(1deg);">
+              <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1200&auto=format&fit=crop" alt="phone and coffee" onerror="this.src='https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?q=80&w=1200&auto=format&fit=crop'">
+            </div>
+            <div style="margin-top:14px;">
+              <span class="bubble">“Meme dekh jaldi😂”</span>
+              <span class="bubble">“Tu pagal hai kya?”</span>
+              <span class="bubble">“Suno ek gossip hai!”</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="page3" class="page theme-4">
+    <div class="card">
+      <div class="progress">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span>
+      </div>
+      <div class="story-grid">
+        <div class="art">
+          <div class="scene">
+            <div class="polaroids fade-in">
+              <div class="polaroid" style="--r:-8deg">
+                <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=900&auto=format&fit=crop" alt="laughter" onerror="this.src='https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=900&auto=format&fit=crop'">
+              </div>
+              <div class="polaroid" style="--r:6deg">
+                <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?q=80&w=900&auto=format&fit=crop" alt="fun moment" onerror="this.src='https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=900&auto=format&fit=crop'">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="micro fade-in">The funniest part</div>
+          <h1 class="title fade-in delay-1">Tera pagalpan</h1>
+          <p class="subtitle fade-in delay-2">
+            Jab tu weird cheezon par ya apne hi jokes par hasti hai na, sach batau... tab lagta hai ki tere jaisi paagal dost sabko milni chahiye.
+          </p>
+          <div class="btn-row fade-in delay-3">
+            <button onclick="next('page4')">Keep going 👯‍♀️</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="page4" class="page theme-5">
+    <div class="card">
+      <div class="progress">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot"></span>
+      </div>
+      <div class="story-grid">
+        <div>
+          <div class="micro fade-in">Comfort zone</div>
+          <h1 class="title fade-in delay-1">Meri best therapist</h1>
+          <p class="subtitle fade-in delay-2">
+            Tu ek aisi dost hai jisko main bina soche kuch bhi bata sakta hu. 
+            Teri presence hi enough hai — no judgment, sirf support aur faltu advice 😂.
+          </p>
+          <div class="btn-row fade-in delay-3">
+            <button onclick="next('page5')">Promise me 🤝</button>
+          </div>
+        </div>
+        <div class="art">
+          <div class="scene">
+            <div class="photo-frame fade-in" style="transform:rotate(-1deg);">
+              <img src="https://images.unsplash.com/photo-1500634245200-e5240a8a0e7b?q=80&w=1200&auto=format&fit=crop" alt="calm romantic" onerror="this.src='https://images.unsplash.com/photo-1492724441997-5dc865305da7?q=80&w=1200&auto=format&fit=crop'">
+            </div>
+            <div style="margin-top:12px;">
+              <span class="note" style="--r:-4deg">caring</span>
+              <span class="note" style="--r:4deg">crazy</span>
+              <span class="note" style="--r:-2deg">bestie</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="page5" class="page theme-6">
+    <div class="card">
+      <div class="progress">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"></span>
+      </div>
+      <div class="story-grid">
+        <div class="art">
+          <div class="scene">
+            <div class="photo-frame fade-in" style="transform:rotate(2deg);">
+              <img src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?q=80&w=1200&auto=format&fit=crop" alt="promise flowers" onerror="this.src='https://images.unsplash.com/photo-1526045612212-70caf35c14df?q=80&w=1200&auto=format&fit=crop'">
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="micro fade-in">A little promise</div>
+          <h1 class="title fade-in delay-1">Mera waada</h1>
+          <p class="subtitle fade-in delay-2">
+            Main chahta hoon hamari aisi hi paagalon wali dosti hamesha bani rahe. 
+            Tere saare dramas jhelne ka waada hai mera, hamesha care ke saath.
+          </p>
+          <div class="btn-row fade-in delay-3">
+            <button onclick="next('page6')">Almost there 🎁</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="page6" class="page theme-2">
+    <div class="card">
+      <div class="progress">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"></span>
+      </div>
+      <div class="story-grid">
+        <div>
+          <div class="micro fade-in">Final question</div>
+          <h1 class="title fade-in delay-1">Best friends forever?</h1>
+          <p class="subtitle fade-in delay-2">
+            Aaj ka ye poora safar bas ek baat kehne ke liye tha —
+            teri jagah meri life mein bahut special hai yaar, aur main tujhe kabhi nahi khona chahta.
+          </p>
+          <div class="btn-row fade-in delay-3">
+            <button onclick="acceptBFF()">Yesss 👯‍♀️</button>
+            <button class="ghost" onclick="acceptBFF()">Hamesha! ✨</button>
+          </div>
+        </div>
+        <div class="art">
+          <div class="scene">
+            <div class="photo-frame fade-in" style="transform:rotate(-1deg);">
+              <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200&auto=format&fit=crop" alt="proposal ring" onerror="this.src='https://images.unsplash.com/photo-1523438097201-512ae7d59c2a?q=80&w=1200&auto=format&fit=crop'">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="final" class="page theme-final">
+    <div class="card fade-in" style="max-width:860px; display: flex; flex-direction: column; align-items: center; padding: 40px;">
+      
+      <lottie-player src="https://assets1.lottiefiles.com/packages/lf20_utsfwa3k.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></lottie-player>
+      
+      <h1 class="ml6">
+        <span class="text-wrapper">
+          <span class="letters">Love You Bestie, Khushbu!</span>
+        </span>
+      </h1>
+      
+      <div class="btn-row fade-in delay-4" style="margin-top:20px;">
+        <button onclick="restart()">Read again 🔁</button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const pages = ['intro','page1','page2','page3','page4','page5','page6','final'];
+    let currentPage = 'intro';
+
+    function startJourney() {
+      // Play background music on first tap
+      const audio = document.getElementById('bg-music');
+      if (audio.paused) {
+        audio.play().catch(e => console.log("Audio play failed, browser might block autoplay:", e));
+      }
+      burstHearts(12);
+      showPage('page1');
+    }
+
+    function next(pageId){
+      burstHearts(12);
+      showPage(pageId);
+    }
+
+    function showPage(id){
+      document.getElementById(currentPage).classList.remove('active');
+      const nextPage = document.getElementById(id);
+      nextPage.classList.add('active');
+      currentPage = id;
+      
+      // Auto-scroll to top when moving to next page
+      setTimeout(() => {
+        nextPage.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 50);
+      
+      resetAnimations(nextPage);
+    }
+
+    function resetAnimations(root){
+      root.querySelectorAll('.fade-in').forEach(el => {
+        el.style.animation = 'none';
+        el.offsetHeight;
+        el.style.animation = '';
+      });
+    }
+
+    function acceptBFF(){
+      document.body.style.background = 'linear-gradient(116.82deg, #ff94e7 0%, #27cbff 100%)';
+      burstHearts(36);
+      showPage('final');
+    }
+
+    function restart(){
+      document.body.style.background =
+        'radial-gradient(circle at top left, rgba(255,255,255,.78), transparent 35%), radial-gradient(circle at bottom right, rgba(255,255,255,.45), transparent 30%), linear-gradient(135deg, #fff3f7, #ffe0ea, #ffc2d7)';
+      burstHearts(18);
+      showPage('intro');
+    }
+
+    function burstHearts(count){
+      const wrap = document.getElementById('hearts');
+      for(let i=0;i<count;i++){
+        const s = document.createElement('span');
+        s.className = 'heart';
+        s.textContent = ['✨','💛','😂','💖','✌️'][Math.floor(Math.random()*5)];
+        s.style.left = Math.random() * 100 + 'vw';
+        s.style.animationDuration = (5 + Math.random() * 6) + 's';
+        s.style.animationDelay = (Math.random() * 0.5) + 's';
+        s.style.fontSize = (12 + Math.random()*24) + 'px';
+        wrap.appendChild(s);
+        setTimeout(() => s.remove(), 11000);
+      }
+    }
+
+    // ambient floating hearts
+    burstHearts(16);
+    setInterval(() => {
+      burstHearts(1);
+    }, 1000);
+
+    // Anime JS Text Animation Initialization
+    var textWrapper = document.querySelector('.ml6 .letters');
+    if(textWrapper){
+        textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+
+        anime.timeline({loop: true})
+          .add({
+            targets: '.ml6 .letter',
+            translateY: ["1.1em", 0],
+            translateZ: 0,
+            duration: 750,
+            delay: (el, i) => 50 * i
+          }).add({
+            targets: '.ml6',
+            opacity: 0,
+            duration: 1000,
+            easing: "easeOutExpo",
+            delay: 1000
+          });
+    }
+  </script>
+</body>
+</html>
